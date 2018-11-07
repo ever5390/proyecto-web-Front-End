@@ -1,0 +1,29 @@
+<div class="col-lg-8">
+    <h1>{{titulo}}</h1>
+    <p>Aplicación SPA con Angular y REST con Slim de php</p>
+    <hr>
+    <form #formProducto="ngForm" (ngSubmit)="formProducto.valid && guardar() " class="col-lg-6" novalidate>
+        <label for="nombre">
+            Nombre:
+            <span *ngIf="!nombre.valid && nombre.touched" class="text-danger">*El nombre es obligatorio</span>
+        </label>
+        <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="producto.nombre" required>
+        <label for="descripcion">
+            Descripcion:
+            <span *ngIf="!descripcion.valid && descripcion.touched" class="text-danger">*La decripcion es obligatorio</span>
+        </label>
+        <textarea class="form-control" name="descripcion" #descripcion="ngModel" [(ngModel)]="producto.descripcion" required></textarea>
+        <label for="precio">
+            Precio:
+            <span *ngIf="!precio.valid && precio.touched" class="text-danger">*El precio es obligatorio</span>
+        </label>
+        <input type="text" class="form-control" name="precio" #precio="ngModel" [(ngModel)]="producto.precio" pattern = "[0-9]+" required>
+        <label for="file">
+            Imagen:
+        </label>
+        <input type="file" class="form-control" name="file" #file="ngModel" [(ngModel)]="producto.imagen"><br>
+        <input type="submit" class="btn btn-succes" value="_Save">
+
+    </form>
+    <br>
+</div>
