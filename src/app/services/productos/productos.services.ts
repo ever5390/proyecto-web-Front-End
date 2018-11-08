@@ -24,12 +24,32 @@ export class ProductosServices {
             .map( res => res.json());
     }
 
+    getProductosId(id: number) {
+        return this._http.get(this.url + 'producto/' + id)
+            .map( res => res.json());
+    }
+
     addProductos(producto: PorductoModel) {
         const json = JSON.stringify(producto);
         const params = 'json=' + json;
         const headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
 
-        return this._http.post(this.url + 'productos', params, {headers: headers}).map(res => res.json());
+        return this._http.post(this.url + 'productos', params, {headers: headers})
+                         .map(res => res.json());
+    }
+
+    updateProducto(id: number, producto: PorductoModel) {
+        const json = JSON.stringify(producto);
+        const params = 'json=' + json;
+        const headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+
+        return this._http.post(this.url + 'update-producto/' + id, params, {headers: headers})
+                         .map(res => res.json());
+    }
+
+    deleteProductos(id: number) {
+        return this._http.get(this.url + 'delete-producto/' + id)
+                        .map(res => res.json());
     }
 
     makeFileRequest(url: string, params: Array<string>, files: Array<File>) {

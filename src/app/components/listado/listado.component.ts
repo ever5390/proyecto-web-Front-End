@@ -12,6 +12,7 @@ import { PorductoModel } from 'src/app/entities/producto/productos.model';
 export class ListadoComponent implements OnInit {
     public titulo: string;
     public productos: Array<PorductoModel>;
+    public accion_borrar: boolean;
 
     constructor(
         private _route: ActivatedRoute,
@@ -20,9 +21,14 @@ export class ListadoComponent implements OnInit {
     ) {
         this.titulo = 'Listado Productos';
         this.productos = [];
+        this.accion_borrar = false;
     }
 
     ngOnInit() {
+        this.getProductos();
+    }
+
+    getProductos() {
         this._productosServices.getProductos()
             .subscribe(
                 result => {
@@ -32,7 +38,46 @@ export class ListadoComponent implements OnInit {
                 error => {
                     console.log('error al recibir los productos' + <any>error);
                 }
-
             );
+    }
+
+    verProducto(index: number) {
+        this._productosServices.getProductosId(index)
+            .subscribe(
+                result => {
+                    this.productos = result.data;
+                    if  (result.code === 200) {
+                        this._router.navigate(['/ingreso']);
+                    } else {
+                        console.log(result);
+                    }
+                }
+                ,
+                error => {
+                    console.log('error al enviar los productos' + <any>error);
+                }
+            );
+    }
+
+    consultarborrar() {
+        this.accion_borrar = true;
+    }
+
+    deleteProducto(index: number) {
+        this._productosServices.deleteProductos(index).subscribe(
+            result => {
+                if (result.code === 200) {
+                    this.getProductos();
+                    console.log(result);
+                } else {
+                    console.log('error al borrar');
+                }
+            }
+            ,
+            error => {
+                console.log(<any>error);
+            }
+        );
+        this.accion_borrar = false;
     }
 }

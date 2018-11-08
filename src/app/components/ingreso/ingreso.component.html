@@ -2,7 +2,7 @@
     <h1>{{titulo}}</h1>
     <p>Aplicación SPA con Angular y REST con Slim de php</p>
     <hr>
-    <form #formProducto="ngForm" (ngSubmit)="formProducto.valid && guardar() " class="col-lg-6" novalidate>
+    <form #formProducto="ngForm" (ngSubmit)="formProducto.valid && onSubmit() " class="col-lg-6" novalidate>
         <label for="nombre">
             Nombre:
             <span *ngIf="!nombre.valid && nombre.touched" class="text-danger">*El nombre es obligatorio</span>
@@ -21,7 +21,11 @@
         <label for="file">
             Imagen:
         </label>
-        <input type="file" class="form-control" name="file" #file="ngModel" [(ngModel)]="producto.imagen"><br>
+        <div *ngIf = "edicion">
+                <img src="http://localhost:8080/Angular7/proyecto_web_backend/uploads/{{producto.imagen}}" />
+        </div>
+
+        <input type="file" class="form-control" name="file" (change)="fileChangesEvent($event)"><br>
         <input type="submit" class="btn btn-succes" value="_Save">
 
     </form>

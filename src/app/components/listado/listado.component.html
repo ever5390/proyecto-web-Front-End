@@ -1,24 +1,26 @@
 <div class="col-lg-8">
-    <div class="jumbotron">
-        <h1>{{titulo}}</h1>
-        <p>Aplicación SPA con Angular y REST con Slim de php</p>
-        <div>
-            <ul>
-                <li *ngFor="let prod of productos">
-                        {{prod.nombre}} - {{prod.descripcion}} - $ {{prod.precio}}
-                </li>
-            </ul>
-            
-        </div>
+    <h1>{{titulo}}</h1>
+    <p>Aplicación SPA con Angular y REST con Slim de php</p>
+    <div class="container-fluid">
+        <div clas="row">
+            <div class="col-xl-4" *ngFor="let prod of productos; let i = index">
+                <div>
+                        <img src="http://localhost:8080/Angular7/proyecto_web_backend/uploads/{{prod.imagen}}" />
+                    <div class="caption">
+                        <h3>{{prod.nombre}}</h3>
+                        <p>$ {{prod.precio}}</p>
+                        <p>
+                            <a *ngIf="!accion_borrar" [routerLink]="['/detalle', prod.id]" class="btn btn-md btn-primary" >Ver</a>
+                            <a *ngIf="!accion_borrar" (click) = "consultarborrar()" class="btn btn-md btn-warning">eliminar</a>
+                            <a *ngIf="!accion_borrar" [routerLink]="['/edicion', prod.id]" class="btn btn-md btn-danger">editar</a>
+                            <span *ngIf="accion_borrar"> Seguro deseas borrar el producto? </span><br>
+                            <a *ngIf="accion_borrar" (click) = "deleteProducto(prod.id)" class="btn btn-md btn-warning">confirmar</a>
+                            <a *ngIf="accion_borrar" (click) = "accion_borrar = false" class="btn btn-md btn-danger">cancelar</a>
 
-        <!-- <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="../../imagenes/estafa-nike.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div> -->
+        </div>
     </div>
-
 </div>

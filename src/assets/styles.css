@@ -55,3 +55,7 @@ nav ul li a:hover{
 .item-active {
     color: #64B5F6;
 }
+
+.img_mostrar{
+    width: 200px;
+}
