@@ -5,19 +5,25 @@
         <div clas="row">
             <div class="col-xl-4" *ngFor="let prod of productos; let i = index">
                 <div>
-                        <img src="http://localhost:8080/Angular7/proyecto_web_backend/uploads/{{prod.imagen}}" />
+                        <!-- OFICINA -->
+                        <!-- <img src="http://localhost:8080/Angular7/proyecto_web_backend/uploads/{{prod.imagen}}" /> -->
+                        
+                        <!-- HOGAR -->
+                        <img class="imagen-lista" src="http://localhost/API-REST-ANGULAR-PHP-SLIM/Bckend_php_SlimFrameWork/uploads/{{prod.imagen}}" />
+
                     <div class="caption">
                         <h3>{{prod.nombre}}</h3>
                         <p>$ {{prod.precio}}</p>
-                        <p>
-                            <a *ngIf="!accion_borrar" [routerLink]="['/detalle', prod.id]" class="btn btn-md btn-primary" >Ver</a>
-                            <a *ngIf="!accion_borrar" (click) = "consultarborrar()" class="btn btn-md btn-warning">eliminar</a>
-                            <a *ngIf="!accion_borrar" [routerLink]="['/edicion', prod.id]" class="btn btn-md btn-danger">editar</a>
-                            <span *ngIf="accion_borrar"> Seguro deseas borrar el producto? </span><br>
-                            <a *ngIf="accion_borrar" (click) = "deleteProducto(prod.id)" class="btn btn-md btn-warning">confirmar</a>
-                            <a *ngIf="accion_borrar" (click) = "accion_borrar = false" class="btn btn-md btn-danger">cancelar</a>
-
-                        </p>
+                        <div *ngIf="accion_borrar != prod.id">
+                            <a [routerLink]="['/detalle', prod.id]" class="btn btn-md btn-primary" >Ver</a>
+                            <a (click) = "consultarborrar(prod.id)" class="btn btn-md btn-warning">eliminar</a>
+                            <a [routerLink]="['/edicion', prod.id]" class="btn btn-md btn-danger">editar</a>
+                        </div>
+                        <div *ngIf="accion_borrar == prod.id">
+                            <span> Seguro deseas borrar el producto? </span><br>
+                            <a (click) = "deleteProducto(prod.id)" class="btn btn-md btn-warning">confirmar</a>
+                            <a (click) = "cancelar()" class="btn btn-md btn-danger">cancelar</a>
+                        </div>
                     </div>
                 </div>
             </div>

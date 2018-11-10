@@ -22,7 +22,12 @@
             Imagen:
         </label>
         <div *ngIf = "edicion">
-                <img src="http://localhost:8080/Angular7/proyecto_web_backend/uploads/{{producto.imagen}}" />
+            <!-- OFICINA -->
+            <!-- <img src="http://localhost:8080/Angular7/proyecto_web_backend/uploads/{{producto.imagen}}" class ="img_mostrar"/> -->
+
+            <!-- HOGAR -->
+            <img src="http://localhost/API-REST-ANGULAR-PHP-SLIM/Bckend_php_SlimFrameWork/uploads/{{producto.imagen}}" class ="img_mostrar"/>
+            
         </div>
 
         <input type="file" class="form-control" name="file" (change)="fileChangesEvent($event)"><br>

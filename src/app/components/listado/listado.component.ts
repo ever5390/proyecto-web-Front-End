@@ -12,7 +12,7 @@ import { PorductoModel } from 'src/app/entities/producto/productos.model';
 export class ListadoComponent implements OnInit {
     public titulo: string;
     public productos: Array<PorductoModel>;
-    public accion_borrar: boolean;
+    public accion_borrar: number;
 
     constructor(
         private _route: ActivatedRoute,
@@ -21,7 +21,7 @@ export class ListadoComponent implements OnInit {
     ) {
         this.titulo = 'Listado Productos';
         this.productos = [];
-        this.accion_borrar = false;
+        this.accion_borrar = null;
     }
 
     ngOnInit() {
@@ -59,10 +59,14 @@ export class ListadoComponent implements OnInit {
             );
     }
 
-    consultarborrar() {
-        this.accion_borrar = true;
+    consultarborrar(index) {
+        this.accion_borrar = index;
     }
 
+    cancelar() {
+        this.accion_borrar = null;
+    }
+    
     deleteProducto(index: number) {
         this._productosServices.deleteProductos(index).subscribe(
             result => {
@@ -78,6 +82,6 @@ export class ListadoComponent implements OnInit {
                 console.log(<any>error);
             }
         );
-        this.accion_borrar = false;
+        this.accion_borrar = null;
     }
 }

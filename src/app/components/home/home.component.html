@@ -1,11 +1,31 @@
+<h3>Uso de ng-template</h3>
 <div class="col-lg-8">
     <div class="jumbotron">
         <h1>{{titulo}}</h1>
-        <p>Aplicación SPA con Angular y REST con Slim de php</p>
-        <p>
-            <a [routerLink] = "['/listado']" class="btn btn-lg btn-primary">Ver productos</a>
-            <a [routerLink] = "['/ingreso']" class="btn btn-lg btn-success">Añadir Productos</a>
-        </p>
+        <p>kjkj<label>soyi label </label>ón SPA con Angular y REST con Slim de php</p>
+        <a routerLink = "/listado" class="btn btn-lg btn-primary">Ver productos</a>
+        <!-- <a [routerLink] = "['/listado']" class="btn btn-lg btn-primary">Ver productos</a> -->
+        <div  *ngIf="administrador; then admin else noAdmin"></div>
+        <hr>
+            <h3>Padre recibe objeto de hijo</h3>
+            <p>{{parametroDeHijo}}</p>
+        <hr>
+        <app-hijo-home 
+            [param_1] = "'De padre a hijo'" 
+            [param_2] = "parametroDePadre" 
+            [param_3] = "objeto"
+            (paramOutput) = "metodoRecibePadre($event)"
+            >
+        </app-hijo-home>   
     </div>
-
 </div>
+
+<ng-template #admin>
+    <p>hELLO</p>
+    <button (click)="cambiar(false)">cliente</button>
+</ng-template>
+<ng-template #noAdmin>
+    <p>GoodBye</p>
+    <button (click)="cambiar(true)">Admin</button>
+    <a [routerLink] = "['/ingreso']" class="btn btn-lg btn-success">Añadir Productos</a>
+</ng-template>
